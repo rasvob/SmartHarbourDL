@@ -1,0 +1,7 @@
+camera-01:
+  annotations: "/data/public/svo0175/SmartHarbourDL/annotations/project_camera_01_09_to_11_06_23-2023_07_20_12_42_13-cvat for video 1.1.xml"
+  data-folder: "/data/public/svo0175/SmartHarbour/Camera_01"
+
+camera-02:
+  annotations: "/data/public/svo0175/SmartHarbourDL/annotations/project_camera_02_09_to_11_06_23-2023_07_17_13_14_54-cvat for video 1.1.xml"
+  data-folder: "/data/public/svo0175/SmartHarbour/Camera_02"

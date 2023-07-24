@@ -48,7 +48,7 @@ def plot_bboxes(image, boxes, label_id=8, score=1.0):
 def onMouse(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
        # draw circle here (etc...)
-       print('x = %d (%f), y = %d (%f)'%(x, x/1920, y, y/1080))
+       print('x = %d (%f), y = %d (%f, %f)'%(x, x/1920, y, y/1080, y/1920))
 
 
 if __name__ == '__main__':

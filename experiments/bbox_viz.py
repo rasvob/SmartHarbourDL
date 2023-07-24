@@ -74,8 +74,8 @@ if __name__ == '__main__':
         if key == ord('n') or i == 0:
             ret, frame = cap.read()
             if ret:
-                boxes = df_file[df_file['frame_id'] == curr_frame][['xt', 'yt', 'xb', 'yt']].values
-                print(df_file[df_file['frame_id'] == curr_frame][['xt', 'yt', 'xb', 'yt', 'confidence']])
+                boxes = df_file[df_file['frame_id'] == curr_frame][['x', 'y', 'w', 'h']].values
+                print(df_file[df_file['frame_id'] == curr_frame][['x', 'x', 'w', 'h', 'confidence']])
                 # image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 # cv2.imshow(video, image)
                 

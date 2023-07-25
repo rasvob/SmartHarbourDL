@@ -5,8 +5,6 @@ import numpy as np
 import yaml
 from tqdm import tqdm, trange
 
-
-
 def box_label(image, box, label='', color=(128, 128, 128), txt_color=(255, 255, 255), wv=1920, hv=1080):
   lw = max(round(sum(image.shape) / 2 * 0.003), 2)
   center_x, center_y = int(box[0]), int(box[1])
@@ -61,13 +59,13 @@ if __name__ == '__main__':
             print(exc)
 
     annotations_path = r'.\annotations\yolov8x_no_train_labels.csv'
-    video = 'cfg_raw_cam_02_fhd_h265_20230609T090003.mkv'
+    video = 'cfg_raw_cam_01_fhd_h265_20230609T050002.mkv'
     df = pd.read_csv(annotations_path, sep=';')
     df_file = df[df['filename'] == video]
-    folder = config['camera-02']['data-folder']
+    folder = config['camera-01']['data-folder']
 
-    # video_path = os.path.join(folder, video)
-    video_path = os.path.join(r'C:\Users\svo0175\Downloads', r'cfg_raw_cam_02_fhd_h265_20230609T090003 (5).avi')
+    video_path = os.path.join(folder, video)
+    # video_path = os.path.join(r'C:\Users\svo0175\Downloads', r'cfg_raw_cam_02_fhd_h265_20230609T090003 (5).avi')
 
     cap = cv2.VideoCapture(video_path)
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))

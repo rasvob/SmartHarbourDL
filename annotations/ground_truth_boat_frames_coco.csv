@@ -1,4 +1,4 @@
-;name;camera_id;datetime;frame_id_in_track;label;x;y;w;h;confidance
+;filename;camera_id;datetime;frame_id;label_class;x;y;w;h;confidance
 0;cfg_raw_cam_01_fhd_h265_20230609T050002.mkv;01;2023-06-09 05:00:02;1087;8;1332.005;544.44;187.08999999999992;81.58000000000004;1
 1;cfg_raw_cam_01_fhd_h265_20230609T050002.mkv;01;2023-06-09 05:00:02;1088;8;1331.5;542.5;187.0;81.0;1
 2;cfg_raw_cam_01_fhd_h265_20230609T050002.mkv;01;2023-06-09 05:00:02;1089;8;1332.5;543.5;187.0;81.0;1

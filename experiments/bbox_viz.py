@@ -46,7 +46,7 @@ def plot_bboxes(image, boxes, label_id=8, score=1.0):
         #add score in label if score=True
         label = labels[label_id] + " " + str(round(100 * float(score),1)) + "%"
         color = colors[label_id]
-        box_label(image, box, label, color,wv=1920, hv=1088)
+        box_label(image, box, label, color,wv=1920, hv=1080)
 
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     cv2.imshow('Video',image)
@@ -81,7 +81,7 @@ if __name__ == '__main__':
         if key == ord('n') or i == 0:
             ret, frame = cap.read()
             if ret:
-                boxes = df_file[df_file['frame_id'] == curr_frame][['x', 'y', 'w', 'h']].values
+                boxes = df_file[df_file['frame_id'] == curr_frame+1][['x', 'y', 'w', 'h']].values
                 print(boxes)
                 # image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 # cv2.imshow(video, image)
@@ -109,7 +109,3 @@ if __name__ == '__main__':
             print(f"unknown key code 0x{key:02x}")
 
     cv2.destroyAllWindows()
-
-
-
-

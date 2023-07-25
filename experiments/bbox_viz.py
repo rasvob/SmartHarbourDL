@@ -15,7 +15,13 @@ with open(CONFIG_PATH, "r") as stream:
 
 def box_label(image, box, label='', color=(128, 128, 128), txt_color=(255, 255, 255), wv=1920, hv=1080):
   lw = max(round(sum(image.shape) / 2 * 0.003), 2)
-  p1, p2 = (int(box[0]*wv), int(box[1]*hv)), (int(box[0]*wv + box[2]*wv), int(box[1]*hv + box[3]*hv))
+  center_x, center_y = int(box[0]*wv), int(box[1]*hv)
+  left_top_x = center_x -  int((box[2]/2)*wv)
+  left_top_y = center_y -  int((box[3]/2)*hv)
+
+  right_bot_x = center_x +  int((box[2]/2)*wv)
+  right_bot_y = center_y +  int((box[3]/2)*hv)
+  p1, p2 = (left_top_x, left_top_y), (right_bot_x, right_bot_y)
   cv2.rectangle(image, p1, p2, color, thickness=lw, lineType=cv2.LINE_AA)
   if label:
     tf = max(lw - 1, 1)  # font thickness
@@ -40,7 +46,7 @@ def plot_bboxes(image, boxes, label_id=8, score=1.0):
         #add score in label if score=True
         label = labels[label_id] + " " + str(round(100 * float(score),1)) + "%"
         color = colors[label_id]
-        box_label(image, box, label, color)
+        box_label(image, box, label, color,wv=1920, hv=1088)
 
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     cv2.imshow('Video',image)
@@ -58,7 +64,8 @@ if __name__ == '__main__':
     df_file = df[df['filename'] == video]
     folder = config['camera-02']['data-folder']
 
-    video_path = os.path.join(folder, video)
+    # video_path = os.path.join(folder, video)
+    video_path = os.path.join(r'C:\Users\svo0175\Downloads', r'cfg_raw_cam_02_fhd_h265_20230609T090003 (5).avi')
 
     cap = cv2.VideoCapture(video_path)
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -75,7 +82,7 @@ if __name__ == '__main__':
             ret, frame = cap.read()
             if ret:
                 boxes = df_file[df_file['frame_id'] == curr_frame][['x', 'y', 'w', 'h']].values
-                print(df_file[df_file['frame_id'] == curr_frame][['x', 'x', 'w', 'h', 'confidence']])
+                print(boxes)
                 # image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 # cv2.imshow(video, image)
                 

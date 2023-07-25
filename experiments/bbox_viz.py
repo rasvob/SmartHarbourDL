@@ -40,14 +40,13 @@ def plot_bboxes(image, boxes, label_id=8, score=1.0):
         color = colors[label_id]
         box_label(image, box, label, color,wv=1920, hv=1080)
 
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     cv2.imshow('Video',image)
 
 def onMouse(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
        # draw circle here (etc...)
-       print('x = %d (%f), y = %d (%f, %f)'%(x, x/1920, y, y/1080, y/1920))
-
+       print('x = %d (%f), y = %d (%f)'%(x, x/1920, y, y/1080))
 
 if __name__ == '__main__':
     CONFIG_PATH = r'./config/config.local.yaml'
@@ -60,9 +59,10 @@ if __name__ == '__main__':
 
     annotations_path = r'.\annotations\yolov8x_no_train_labels.csv'
     video = 'cfg_raw_cam_01_fhd_h265_20230609T050002.mkv'
+    CAM = '01' if '_cam_01' in video else '02'
     df = pd.read_csv(annotations_path, sep=';')
     df_file = df[df['filename'] == video]
-    folder = config['camera-01']['data-folder']
+    folder = config[f'camera-{CAM}']['data-folder']
 
     video_path = os.path.join(folder, video)
     # video_path = os.path.join(r'C:\Users\svo0175\Downloads', r'cfg_raw_cam_02_fhd_h265_20230609T090003 (5).avi')
@@ -71,7 +71,6 @@ if __name__ == '__main__':
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     fps = int(cap.get(cv2.CAP_PROP_FPS))
     print(f'frame count: {frame_count}, fps: {fps}')
-
 
     curr_frame = 0
     seq = trange(frame_count)
@@ -82,31 +81,26 @@ if __name__ == '__main__':
             ret, frame = cap.read()
             if ret:
                 boxes = df_file[df_file['frame_id'] == curr_frame][['x', 'y', 'w', 'h']].values
-                print(boxes)
-                # image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                # cv2.imshow(video, image)
-                
                 plot_bboxes(frame, boxes, label_id=8, score=1.0)
                 cv2.setMouseCallback('Video', onMouse)
-
                 curr_frame += 1
-
+                seq.update()
             else:
                 break
         elif key == ord('f'):
             fast_forward = 4*10 - 1
             for _ in range(fast_forward):
-                # ret, frame = cap.read()
+                ret, frame = cap.read()
                 seq.update()
-            cap.set(cv2.CAP_PROP_POS_FRAMES, curr_frame + fast_forward)
+            # cap.set(cv2.CAP_PROP_POS_FRAMES, curr_frame + fast_forward)
             curr_frame += fast_forward
             seq.refresh()
 
             ret, frame = cap.read()
             seq.update()
             curr_frame += 1
-            image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            cv2.imshow('Video',image)
+            # image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            cv2.imshow('Video',frame)
         elif key == ord('q'):
             break
 

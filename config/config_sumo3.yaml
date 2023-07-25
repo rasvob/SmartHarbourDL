@@ -5,3 +5,9 @@ camera-01:
 camera-02:
   annotations: "/data/public/svo0175/SmartHarbourDL/annotations/project_camera_02_09_to_11_06_23-2023_07_17_13_14_54-cvat for video 1.1.xml"
   data-folder: "/data/public/svo0175/SmartHarbour/Camera_02"
+
+yolo-dataset:
+  input-labels: "/data/public/svo0175/SmartHarbourDL/annotations/ground_truth_boat_frames_coco.csv"
+  output-path-raw: "/data/public/svo0175/SmartHarbourYOLO/Raw"
+  video-width: 1920
+  video-height: 1080

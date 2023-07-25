@@ -5,13 +5,7 @@ import numpy as np
 import yaml
 from tqdm import tqdm, trange
 
-CONFIG_PATH = r'./config/config.local.yaml'
 
-with open(CONFIG_PATH, "r") as stream:
-    try:
-        config = yaml.safe_load(stream)
-    except yaml.YAMLError as exc:
-        print(exc)
 
 def box_label(image, box, label='', color=(128, 128, 128), txt_color=(255, 255, 255), wv=1920, hv=1080):
   lw = max(round(sum(image.shape) / 2 * 0.003), 2)
@@ -58,6 +52,14 @@ def onMouse(event, x, y, flags, param):
 
 
 if __name__ == '__main__':
+    CONFIG_PATH = r'./config/config.local.yaml'
+
+    with open(CONFIG_PATH, "r") as stream:
+        try:
+            config = yaml.safe_load(stream)
+        except yaml.YAMLError as exc:
+            print(exc)
+
     annotations_path = r'.\annotations\yolov8x_no_train_labels.csv'
     video = 'cfg_raw_cam_02_fhd_h265_20230609T090003.mkv'
     df = pd.read_csv(annotations_path, sep=';')

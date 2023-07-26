@@ -26,7 +26,7 @@ if __name__ == '__main__':
     
     experiment = Experiment(
         api_key = os.environ.get("COMET_API_KEY"),
-        project_name = config['yolo-dataset']['comet-project-name']
+        project_name = config['yolo-dataset']['comet-project-name'],
         workspace=os.environ.get("COMET_WORKSPACE")
     )
 

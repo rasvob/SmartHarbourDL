@@ -168,3 +168,5 @@ output/
 local/
 
 config.local.yaml
+yolov8n.pt
+.env

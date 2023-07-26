@@ -9,5 +9,7 @@ camera-02:
 yolo-dataset:
   input-labels: "/data/public/svo0175/SmartHarbourDL/annotations/ground_truth_boat_frames_coco.csv"
   output-path-raw: "/data/public/svo0175/SmartHarbourYOLO/Raw"
+  yolo-path: "/data/public/svo0175/SmartHarbourYOLO/Yolo"
   video-width: 1920
   video-height: 1080
+  input-model: "/data/public/svo0175/SmartHarbourDL/saved_models/yolov8x.pt"

@@ -6,7 +6,7 @@ from tqdm import tqdm, trange
 import yaml
 import logging
 
-CAM = '01'
+CAM = '02'
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -15,9 +15,6 @@ ch.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 logger.addHandler(ch)
-
-
-
 
 def df_to_yolo_arr(df:pd.DataFrame, video_width, video_height) -> List[Tuple[str, str, int, float, float, float, float]]:
     df_sub = df[['filename', 'frame_id', 'label_class', 'x', 'y', 'w', 'h']]

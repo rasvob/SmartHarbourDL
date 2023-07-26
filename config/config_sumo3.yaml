@@ -13,3 +13,4 @@ yolo-dataset:
   video-width: 1920
   video-height: 1080
   input-model: "/data/public/svo0175/SmartHarbourDL/saved_models/yolov8x.pt"
+  comet-project-name: yolov8x-train-01

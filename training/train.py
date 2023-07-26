@@ -23,12 +23,11 @@ if __name__ == '__main__':
             config = yaml.safe_load(stream)
         except yaml.YAMLError as exc:
             print(exc)
-
     
     experiment = Experiment(
         api_key = os.environ.get("COMET_API_KEY"),
-        project_name = "yolov8x-train-01",
-        workspace="rasvob"
+        project_name = config['yolo-dataset']['comet-project-name']
+        workspace=os.environ.get("COMET_WORKSPACE")
     )
 
     model = YOLO(config['yolo-dataset']['input-model'])  # load a pretrained model (recommended for training)

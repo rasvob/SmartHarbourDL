@@ -165,5 +165,8 @@ cython_debug/
 saved_models/
 runs/
 output/
+local/
 
 config.local.yaml
+yolov8n.pt
+.env

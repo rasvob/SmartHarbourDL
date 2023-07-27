@@ -14,3 +14,21 @@ yolo-dataset:
   video-height: 1080
   input-model: "/data/public/svo0175/SmartHarbourDL/saved_models/yolov8x.pt"
   comet-project-name: yolov8x-train-01
+
+yolo-dataset-cam-01:
+  input-labels: "/data/public/svo0175/SmartHarbourDL/annotations/ground_truth_boat_frames_coco.csv"
+  output-path-raw: "/data/public/svo0175/SmartHarbourYOLO/Raw"
+  yolo-path: "/data/public/svo0175/SmartHarbourYOLO/Yolo_Cam_01"
+  video-width: 1920
+  video-height: 1080
+  input-model: "/data/public/svo0175/SmartHarbourDL/saved_models/yolov8x.pt"
+  comet-project-name: yolov8x-train-only-cam-01
+
+yolo-dataset-cam-02:
+  input-labels: "/data/public/svo0175/SmartHarbourDL/annotations/ground_truth_boat_frames_coco.csv"
+  output-path-raw: "/data/public/svo0175/SmartHarbourYOLO/Raw"
+  yolo-path: "/data/public/svo0175/SmartHarbourYOLO/Yolo_Cam_02"
+  video-width: 1920
+  video-height: 1080
+  input-model: "/data/public/svo0175/SmartHarbourDL/saved_models/yolov8x.pt"
+  comet-project-name: yolov8x-train-only-cam-02

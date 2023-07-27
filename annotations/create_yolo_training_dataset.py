@@ -23,6 +23,7 @@ def create_symlinks(files:List[str], subset:str, data_folder:str, image:bool=Tru
 
 if __name__ == '__main__':
     CONFIG_PATH = r'../config/config_sumo3.yaml'
+    yolo_section = 'yolo-dataset-cam-01'
     with open(CONFIG_PATH, "r") as stream:
         try:
             config = yaml.safe_load(stream)
@@ -31,8 +32,8 @@ if __name__ == '__main__':
 
     folders = ['images', 'labels']
     model_folders = ['train', 'val']
-    data_folder = config[f'yolo-dataset']['yolo-path']
-    raw_folder = config[f'yolo-dataset']['output-path-raw']
+    data_folder = config[yolo_section]['yolo-path']
+    raw_folder = config[yolo_section]['output-path-raw']
 
     for folder in model_folders:
         for subfolder in folders:
@@ -45,8 +46,19 @@ if __name__ == '__main__':
     train_images, train_labels = [x for x in images if train_selection in x], [x for x in labels if train_selection in x]
     val_images, val_labels = [x for x in images if val_selection in x], [x for x in labels if val_selection in x]
 
-    create_symlinks(train_images, 'train', data_folder, image=True)
-    create_symlinks(train_labels, 'train', data_folder, image=False)
+    if 'cam-01' in yolo_section or 'cam-02' in yolo_section:
+        cam = 'cam_' + yolo_section.split('-')[-1]
+        train_images, train_labels = [x for x in train_images if cam in x], [x for x in train_labels if cam in x]
+        val_images, val_labels = [x for x in val_images if cam in x], [x for x in val_labels if cam in x]
 
-    create_symlinks(val_images, 'val', data_folder, image=True)
-    create_symlinks(val_labels, 'val', data_folder, image=False)
+    logger.info(f'Found {len(train_images)} training images and {len(train_labels)} training labels')
+    logger.info(f'Found {len(val_images)} validation images and {len(val_labels)} validation labels')
+
+    if len(train_images) != len(train_labels) or len(val_images) != len(val_labels):
+        raise Exception('Number of images and labels do not match')
+
+    # create_symlinks(train_images, 'train', data_folder, image=True)
+    # create_symlinks(train_labels, 'train', data_folder, image=False)
+
+    # create_symlinks(val_images, 'val', data_folder, image=True)
+    # create_symlinks(val_labels, 'val', data_folder, image=False)

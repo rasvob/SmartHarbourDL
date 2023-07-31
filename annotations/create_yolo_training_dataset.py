@@ -23,7 +23,7 @@ def create_symlinks(files:List[str], subset:str, data_folder:str, image:bool=Tru
 
 if __name__ == '__main__':
     CONFIG_PATH = r'../config/config_sumo3.yaml'
-    yolo_section = 'yolo-dataset-cam-01'
+    yolo_section = 'yolo-dataset-cam-02'
     with open(CONFIG_PATH, "r") as stream:
         try:
             config = yaml.safe_load(stream)
@@ -57,8 +57,8 @@ if __name__ == '__main__':
     if len(train_images) != len(train_labels) or len(val_images) != len(val_labels):
         raise Exception('Number of images and labels do not match')
 
-    # create_symlinks(train_images, 'train', data_folder, image=True)
-    # create_symlinks(train_labels, 'train', data_folder, image=False)
+    create_symlinks(train_images, 'train', data_folder, image=True)
+    create_symlinks(train_labels, 'train', data_folder, image=False)
 
-    # create_symlinks(val_images, 'val', data_folder, image=True)
-    # create_symlinks(val_labels, 'val', data_folder, image=False)
+    create_symlinks(val_images, 'val', data_folder, image=True)
+    create_symlinks(val_labels, 'val', data_folder, image=False)

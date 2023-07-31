@@ -6,6 +6,12 @@ camera-02:
   annotations: "/data/public/svo0175/SmartHarbourDL/annotations/project_camera_02_09_to_11_06_23-2023_07_17_13_14_54-cvat for video 1.1.xml"
   data-folder: "/data/public/svo0175/SmartHarbour/Camera_02"
 
+yolo-test-model:
+  input-folder: "/data/public/svo0175/SmartHarbourYOLO/Yolo/images/val"
+  video-width: 1920
+  input-model: "/data/public/svo0175/SmartHarbourDL/runs/detect/train_full_data/weights/best.pt"
+  raw-output-path: "./output/train_full_data.pickle"
+
 yolo-dataset:
   input-labels: "/data/public/svo0175/SmartHarbourDL/annotations/ground_truth_boat_frames_coco.csv"
   output-path-raw: "/data/public/svo0175/SmartHarbourYOLO/Raw"
@@ -13,7 +19,12 @@ yolo-dataset:
   video-width: 1920
   video-height: 1080
   input-model: "/data/public/svo0175/SmartHarbourDL/saved_models/yolov8x.pt"
-  comet-project-name: yolov8x-train-01
+  comet-project-name: "yolov8x-train-01"
+  devices: [0, 1, 2, 3]
+  batch: 8
+  epochs: 100
+  patience: 20
+  coco-input-file: "coco128.yaml"
 
 yolo-dataset-cam-01:
   input-labels: "/data/public/svo0175/SmartHarbourDL/annotations/ground_truth_boat_frames_coco.csv"
@@ -22,7 +33,12 @@ yolo-dataset-cam-01:
   video-width: 1920
   video-height: 1080
   input-model: "/data/public/svo0175/SmartHarbourDL/saved_models/yolov8x.pt"
-  comet-project-name: yolov8x-train-only-cam-01
+  comet-project-name: "yolov8x-train-only-one-cam-cam01"
+  devices: [0, 1, 2, 3]
+  batch: 8
+  epochs: 100
+  patience: 20
+  coco-input-file: "coco128_cam_01.yaml"
 
 yolo-dataset-cam-02:
   input-labels: "/data/public/svo0175/SmartHarbourDL/annotations/ground_truth_boat_frames_coco.csv"
@@ -31,4 +47,9 @@ yolo-dataset-cam-02:
   video-width: 1920
   video-height: 1080
   input-model: "/data/public/svo0175/SmartHarbourDL/saved_models/yolov8x.pt"
-  comet-project-name: yolov8x-train-only-cam-02
+  comet-project-name: "yolov8x-train-only-one-cam-cam02"
+  devices: [0, 1, 2, 3]
+  batch: 8
+  epochs: 100
+  patience: 20
+  coco-input-file: "coco128_cam_02.yaml"

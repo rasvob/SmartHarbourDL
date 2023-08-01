@@ -12,6 +12,18 @@ yolo-test-model:
   input-model: "/data/public/svo0175/SmartHarbourDL/runs/detect/train_cam_01/weights/best.pt"
   raw-output-path: "./output/train_cam_01_data.pickle"
 
+yolo-test-model-video-1:
+  input-folder: "/data/public/svo0175/SmartHarbour/Camera_01"
+  filter-string: "_202307"
+  video-width: 1920
+  input-model: "/data/public/svo0175/SmartHarbourDL/runs/detect/train_full_data/weights/best.pt"
+
+yolo-test-model-video-2:
+  input-folder: "/data/public/svo0175/SmartHarbour/Camera_02"
+  filter-string: "_202307"
+  video-width: 1920
+  input-model: "/data/public/svo0175/SmartHarbourDL/runs/detect/train_full_data/weights/best.pt"
+
 yolo-dataset:
   input-labels: "/data/public/svo0175/SmartHarbourDL/annotations/ground_truth_boat_frames_coco.csv"
   output-path-raw: "/data/public/svo0175/SmartHarbourYOLO/Raw"

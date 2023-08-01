@@ -13,7 +13,7 @@ from comet_ml.integration.pytorch import log_model
 if __name__ == '__main__':
     dotenv.load_dotenv()
     CONFIG_PATH = r'../config/config_sumo3.yaml'
-    EXPERIMENT_NAME = 'yolo-dataset-cam-01'
+    EXPERIMENT_NAME = 'yolo-dataset-cam-02'
     with open(CONFIG_PATH, "r") as stream:
         try:
             config = yaml.safe_load(stream)

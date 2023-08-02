@@ -147,8 +147,8 @@ def evaluate_mAP(df_ground_truth:pd.DataFrame, df_predictions:pd.DataFrame):
             preds[:, -2] = 0
             metric_fn.add(preds, gt)
 
-    return {
-        'mAP_0.5_11points': metric_fn.value(iou_thresholds=0.5, recall_thresholds=np.arange(0., 1.1, 0.1))['mAP'], # PASCAL VOC metric
-        'mAP_0.5_all_points': metric_fn.value(iou_thresholds=0.5)['mAP'], # PASCAL VOC metric at the all points
-        'mAP_0.5_0.95_101points': metric_fn.value(iou_thresholds=np.arange(0.5, 1.0, 0.05), recall_thresholds=np.arange(0., 1.01, 0.01), mpolicy='soft')['mAP'] # COCO metric
-    }
+    result_dict = dict()
+    result_dict['mAP_0.5_11points'] = metric_fn.value(iou_thresholds=0.5, recall_thresholds=np.arange(0., 1.1, 0.1))['mAP'] # PASCAL VOC metric
+    result_dict['mAP_0.5_all_points'] = metric_fn.value(iou_thresholds=0.5)['mAP'] # PASCAL VOC metric at the all points
+    result_dict['mAP_0.5_0.95_101points'] = metric_fn.value(iou_thresholds=np.arange(0.5, 1.0, 0.05), recall_thresholds=np.arange(0., 1.01, 0.01), mpolicy='soft')['mAP'] # COCO metric
+    return result_dict

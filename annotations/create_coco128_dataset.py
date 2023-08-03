@@ -6,7 +6,7 @@ from tqdm import tqdm, trange
 import yaml
 import logging
 
-CAM = '02'
+CAM = '01'
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -29,8 +29,11 @@ def save_yolo_labels(yolo_arr:List[Tuple[str, str, int, float, float, float, flo
         fname, frame = row[:2]
         data = row[2:]
         data_str = ' '.join([str(x) for x in data]) + '\n'
+        label = int(data[0])
+
         with open(os.path.join(output_path_raw, f'Camera_{CAM}', 'labels', f'{fname[:-4]}_{frame}.txt'), 'w') as f:
-            f.write(data_str)
+            if label >= 0:
+                f.write(data_str)
 
 def save_yolo_jpg(yolo_arr:List[Tuple[str, str, int, float, float, float, float]], output_path_raw, data_folder) -> None:
     yolo_set = set([x[0] for x in yolo_arr])

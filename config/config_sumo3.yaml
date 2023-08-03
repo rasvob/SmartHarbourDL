@@ -25,18 +25,18 @@ yolo-test-model-video-2:
   input-model: "/data/public/svo0175/SmartHarbourDL/runs/detect/train_cam_02/weights/best.pt"
 
 yolo-dataset:
-  input-labels: "/data/public/svo0175/SmartHarbourDL/annotations/ground_truth_boat_frames_coco.csv"
-  output-path-raw: "/data/public/svo0175/SmartHarbourYOLO/Raw"
-  yolo-path: "/data/public/svo0175/SmartHarbourYOLO/Yolo"
+  input-labels: "/data/public/svo0175/SmartHarbourDL/annotations/frames_with_no_boat_for_training.csv"
+  output-path-raw: "/data/public/svo0175/SmartHarbourYOLO/YoloBackground"
+  yolo-path: "/data/public/svo0175/SmartHarbourYOLO/YoloBackgroundCoco"
   video-width: 1920
   video-height: 1080
-  input-model: "/data/public/svo0175/SmartHarbourDL/saved_models/yolov8x.pt"
-  comet-project-name: "yolov8x-train-01"
+  input-model: "/data/public/svo0175/SmartHarbourDL/runs/detect/train_full_data/weights/best.pt"
+  comet-project-name: "yolov8x-train-bg-images"
   devices: [0, 1, 2, 3]
   batch: 8
   epochs: 100
   patience: 20
-  coco-input-file: "coco128.yaml"
+  coco-input-file: "coco128_bg_images.yaml"
 
 yolo-dataset-cam-01:
   input-labels: "/data/public/svo0175/SmartHarbourDL/annotations/ground_truth_boat_frames_coco.csv"

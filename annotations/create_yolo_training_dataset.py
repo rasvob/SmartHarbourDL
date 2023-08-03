@@ -21,9 +21,14 @@ def create_symlinks(files:List[str], subset:str, data_folder:str, image:bool=Tru
         new_path = os.path.join(data_folder, 'images' if image else 'labels', subset, bname)
         os.symlink(x, new_path)
 
+def select_valid_labels(images, labels):
+    bnames = [os.path.basename(x)[:-4] for x in images]
+    valid_labels = [x for x in labels if os.path.basename(x)[:-4] in bnames]
+    return valid_labels
+
 if __name__ == '__main__':
     CONFIG_PATH = r'../config/config_sumo3.yaml'
-    yolo_section = 'yolo-dataset-cam-02'
+    yolo_section = 'yolo-dataset'
     with open(CONFIG_PATH, "r") as stream:
         try:
             config = yaml.safe_load(stream)
@@ -54,8 +59,13 @@ if __name__ == '__main__':
     logger.info(f'Found {len(train_images)} training images and {len(train_labels)} training labels')
     logger.info(f'Found {len(val_images)} validation images and {len(val_labels)} validation labels')
 
-    if len(train_images) != len(train_labels) or len(val_images) != len(val_labels):
-        raise Exception('Number of images and labels do not match')
+    if len(train_images) != len(train_labels):
+        logger.info('Number of train images and labels do not match')
+        train_labels = select_valid_labels(train_images, train_labels)
+    
+    if len(val_images) != len(val_labels):
+        logger.info('Number of val images and labels do not match')
+        val_labels = select_valid_labels(val_images, val_labels)
 
     create_symlinks(train_images, 'train', data_folder, image=True)
     create_symlinks(train_labels, 'train', data_folder, image=False)
